@@ -8,11 +8,22 @@
 #
 
 library(shiny)
+library(tidyverse)
+library(lubridate)
+
+# source helpers functions
+source("helpers.R")
+
+# Get a random (daily) timeseries of size n, beginning at dateref 
+# my_timeseries <- getTimeseries(n = 10, dateorigin = '2016-12-01')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
    
   output$distPlot <- renderPlot({
+    
+    my_timeseries <- getTimeseries(n = 10, dateorigin = '2016-12-01')
+    str(my_timeseries)
     
     # generate bins based on input$bins from ui.R
     x    <- faithful[, 2] 
